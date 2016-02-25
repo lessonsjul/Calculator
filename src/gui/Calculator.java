@@ -24,6 +24,7 @@ public class Calculator extends JFrame{
     private Icon backSpaceIcon = new ImageIcon(getClass().getResource("../images/backspace.png"));
     private java.util.List<MyJButton> buttonsList = new ArrayList<>();
 
+
     public Calculator() {
         initComponents();
     }

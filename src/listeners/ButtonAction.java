@@ -54,7 +54,6 @@ public class ButtonAction implements ActionListener {
                 }
                 inputText.append(btnAction);
                 output = inputText.toString();
-//                textIO.setText(inputText.toString());
                 break;
             case "+":
             case "-":
@@ -66,7 +65,6 @@ public class ButtonAction implements ActionListener {
                     prevResult = doAction(prevResult, Double.parseDouble(textIO.getText()), action);
                 }
                 output = String.valueOf(prevResult);
-//                textIO.setText(String.valueOf(prevResult));
                 action = btnAction;
                 newNumber = true;
                 break;
@@ -79,30 +77,25 @@ public class ButtonAction implements ActionListener {
                     prevResult = doAction(prevResult, 0, action);
                 }
                 output = String.valueOf(prevResult);
-//                textIO.setText(String.valueOf(prevResult));
                 action = null;
                 newNumber = true;
                 break;
             case "BACK SPACE":
                 if(textIO.getText().length() > 1) {
                     output = inputText.substring(0, inputText.length() - 1);
-//                    textIO.setText(inputText.substring(0, inputText.length() - 1));
                 }else if(textIO.getText().length() == 1){
                     output = "0";
-//                    textIO.setText("0");
                     newNumber = true;
                 }
                 break;
             case "%":
-                Double tmp = Double.parseDouble(inputText.toString()) / 100;
+            case "log":
+                double tmp = doAction(Double.parseDouble(inputText.toString()), 0, btnAction);
                 output = String.valueOf(tmp);
-//                  textIO.setText(String.valueOf(tmp));
-                newNumber = true;
                 break;
             case "CE":
                 prevResult = 0;
                 output = String.valueOf(prevResult);
-//                textIO.setText(String.valueOf(prevResult));
                 action = null;
                 newNumber = true;
                 break;
@@ -110,7 +103,6 @@ public class ButtonAction implements ActionListener {
                 inputText = inputText.indexOf("-") == -1
                         ? inputText.insert(0,"-"): inputText.deleteCharAt(0);
                 output = String.valueOf(inputText);
-//                textIO.setText(String.valueOf(inputText));
                 break;
         }
 
@@ -124,7 +116,6 @@ public class ButtonAction implements ActionListener {
 
         double res = 0;
 
-        System.out.println("Calculating...");
             if(action.equals("+")) {
                 res = CalcOperations.add(a,b);
             }
@@ -136,6 +127,12 @@ public class ButtonAction implements ActionListener {
             }
             if(action.equals("/")){
                 res = CalcOperations.divide(a,b);
+            }
+            if(action.equals("%")) {
+                res = CalcOperations.procent(a);
+            }
+            if(action.equals("log")) {
+                res = CalcOperations.logNatural(a);
             }
 
         return res;
